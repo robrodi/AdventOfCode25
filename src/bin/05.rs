@@ -14,10 +14,10 @@ pub fn part_one(input: &str) -> Option<u64> {
 
         let mut j = 0;
         while j < range_count {
-            if (debug) { println!("Checking ID {id} against range {}-{}", starts[j], ends[j]); }
+            if debug { println!("Checking ID {id} against range {}-{}", starts[j], ends[j]); }
             if starts[j] <= id && ends[j] >= id {
                 fresh_id_count += 1;
-                if (debug) { println!("ID {id} is fresh."); }
+                if debug { println!("ID {id} is fresh."); }
                 break;
             }    
             j += 1;
@@ -47,7 +47,7 @@ fn parse (input: &str) -> (Vec<u64>, Vec<u64>, Vec<u64>) {
             let parts: Vec<&str> = line.split("-").collect();
             let mut s :u64 = parts[0].parse().unwrap();
             let mut e: u64 = parts[1].parse().unwrap();
-            if (debug) { print!("Parsing range: {}-{}. ", parts[0], parts[1]); }
+            if debug { print!("Parsing range: {}-{}. ", parts[0], parts[1]); }
 
             let size: usize = starts.len();
             let mut starts_to_remove = Vec::new();
@@ -56,7 +56,7 @@ fn parse (input: &str) -> (Vec<u64>, Vec<u64>, Vec<u64>) {
             for i in 0..size {
                 let existing_start = *starts.iter().nth(i).unwrap();
                 let existing_end = *ends.iter().nth(i).unwrap();
-                if (debug) { print!("\n\tChecking against existing range {existing_start}-{existing_end}."); }
+                if debug { print!("\n\tChecking against existing range {existing_start}-{existing_end}."); }
 
                 // start before existing end.
                 // case 1: existing start, new start, existing end, new end
@@ -67,7 +67,7 @@ fn parse (input: &str) -> (Vec<u64>, Vec<u64>, Vec<u64>) {
                     starts_to_remove.push(existing_start);
                     ends_to_remove.push(existing_end);
                     overlaps += 1;
-                    if (debug) { println!("\n\tNew Range {existing_start}-{existing_end} overlaps with existing range {s}-{e}. Target range {new_start}-{new_end}"); }
+                    if debug { println!("\n\tNew Range {existing_start}-{existing_end} overlaps with existing range {s}-{e}. Target range {new_start}-{new_end}"); }
                     s = new_start;
                     e = new_end;    
                     continue;
@@ -108,7 +108,7 @@ mod tests {
     #[test]
     fn day5_test_part_one_overlap(){
         // overlaps at the end of existing range
-        let (starts, ends, ids) = parse(&advent_of_code::template::read_file("examples", DAY));
+        let (starts, ends, _ids) = parse(&advent_of_code::template::read_file("examples", DAY));
         let size: usize = starts.len();
 
         for i in 0..size {
@@ -117,13 +117,13 @@ mod tests {
         assert_eq!(size, 2);
 
         // overlaps at the start of existing range
-        let (starts, ends, ids) = parse("4-6\n1-5");
+        let (starts, ends, _ids) = parse("4-6\n1-5");
         assert_eq!(starts.len(), 1);
         assert_eq!(starts[0], 1);
         assert_eq!(ends[0], 6);
 
         // entirely inside existing range
-        let (starts, ends, ids) = parse("1-6\n3-5");
+        let (starts, ends, _ids) = parse("1-6\n3-5");
         assert_eq!(starts.len(), 1);
         assert_eq!(starts[0], 1);
         assert_eq!(ends[0], 6);
