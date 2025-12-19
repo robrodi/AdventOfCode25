@@ -9,7 +9,7 @@ pub fn part_two(input: &str) -> Option<u64> {
 }
 
 #[cfg(test)]
-mod tests {
+mod day%DAY_NUMBER%_tests {
     use super::*;
 
     #[test]

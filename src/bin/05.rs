@@ -39,7 +39,7 @@ fn parse (input: &str) -> (Vec<u64>, Vec<u64>, Vec<u64>) {
     let mut ends :BTreeSet<u64> = BTreeSet::new();
     let mut ids: Vec<u64> = Vec::new();
     let lines: std::str::Lines<'_> = input.lines();
-    let mut overlaps = 0;
+    // let mut overlaps = 0;
     for line in lines {
         if line == "" { continue; }
 
@@ -66,14 +66,13 @@ fn parse (input: &str) -> (Vec<u64>, Vec<u64>, Vec<u64>) {
                     let new_end = max(e, existing_end);
                     starts_to_remove.push(existing_start);
                     ends_to_remove.push(existing_end);
-                    overlaps += 1;
                     if debug { println!("\n\tNew Range {existing_start}-{existing_end} overlaps with existing range {s}-{e}. Target range {new_start}-{new_end}"); }
                     s = new_start;
                     e = new_end;    
                     continue;
                 }
             }
-            println!();
+            // println!();
             for rem in 0..starts_to_remove.len()
             {
                 let s_val = starts_to_remove[rem];
@@ -90,7 +89,7 @@ fn parse (input: &str) -> (Vec<u64>, Vec<u64>, Vec<u64>) {
         }
     }
 
-    println!("Total number of ranges: {}. Total overlaps merged: {overlaps}", starts.len());
+    // println!("Total number of ranges: {}. Total overlaps merged: {overlaps}", starts.len());
     
     (starts.into_iter().collect(), ends.into_iter().collect(), ids)
 }

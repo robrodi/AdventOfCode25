@@ -17,7 +17,7 @@ pub fn best_joltage_2(line: &str) -> u64 {
     let max_index = line.find(max).unwrap();
     let next_max = line[(max_index+1)..].chars().max().unwrap();
     
-    println!("Line: {}. Max: {} at index {}. Next Max: {}. Result: {}{}", line, max, max_index, next_max, max, next_max);
+    //println!("Line: {}. Max: {} at index {}. Next Max: {}. Result: {}{}", line, max, max_index, next_max, max, next_max);
 
     10 * (max.to_digit(10).unwrap() as u64) + (next_max.to_digit(10).unwrap() as u64)
 }

@@ -9,7 +9,7 @@ pub fn part_one(input: &str) -> Option<u64> {
         let operator = get_value(&values, columns, rows - 1, c);
         let value:u64 = if operator == "+"              { numbers.sum() } 
                         else if operator == "*"         { numbers.product() } else { panic!("Unknown operator {}", operator) };
-        println!("Column {c}: {:?} -> {} = {value}", (0..=number_rows).map(|r| get_value(&values, columns, r, c).parse::<u64>().unwrap()).collect::<Vec<u64>>(), operator);
+        // println!("Column {c}: {:?} -> {} = {value}", (0..=number_rows).map(|r| get_value(&values, columns, r, c).parse::<u64>().unwrap()).collect::<Vec<u64>>(), operator);
         column_results.push(value);
     }
     Some(column_results.iter().sum())
@@ -43,7 +43,7 @@ pub fn parse_two(input: &str) -> (Vec<char>, usize, usize) {
 }
 pub fn part_two(input: &str) -> Option<u64> {
     let (lchars, rows, cols) = parse_two(input);
-    println!("Rows: {}, Cols: {}", rows, cols);
+    // println!("Rows: {}, Cols: {}", rows, cols);
 
     let mut operator: char = ' ';
     let mut problem_results: Vec<u64> = Vec::new();
@@ -54,7 +54,7 @@ pub fn part_two(input: &str) -> Option<u64> {
         if op_char != ' ' { 
             problem_parts = Vec::new();
             operator = op_char; 
-            println!("problem operator: {operator} at index {}", index(cols,rows -1, c));
+            // println!("problem operator: {operator} at index {}", index(cols,rows -1, c));
         }
 
         // read all the characters in this column except the final operator one.
@@ -71,7 +71,7 @@ pub fn part_two(input: &str) -> Option<u64> {
             let s: String = column_value.into_iter().collect();
             let value = s.parse::<u64>().unwrap();
             problem_parts.push(value);
-            println!("  Column {c} values: {value}");
+            // println!("  Column {c} values: {value}");
         }
 
         // if it's an empty column, or the final column, this problem is complete. solve the problem and push the result.
@@ -83,7 +83,7 @@ pub fn part_two(input: &str) -> Option<u64> {
                             } else { 
                                 panic!("Unknown operator {operator}"); 
                             };
-            println!("New Problem! Last Result = {value}");
+            // println!("New Problem! Last Result = {value}");
             problem_results.push(value);
             continue; 
         }
