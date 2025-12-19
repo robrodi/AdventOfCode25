@@ -1,7 +1,7 @@
 advent_of_code::solution!(4);
 
 pub fn part_one(input: &str) -> Option<u64> {
-    let mut map = input;
+    let map = input;
     let (accessible_rolls, new_map) = move_rolls(&map);
     println!("{}", new_map);
     Some(accessible_rolls)
