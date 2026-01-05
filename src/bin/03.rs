@@ -6,23 +6,27 @@ pub fn part_one(input: &str) -> Option<u64> {
         .filter(|line| !line.is_empty())
         .map(best_joltage_2)
         .sum();
-        
+
     Some(result)
 }
 pub fn best_joltage_2(line: &str) -> u64 {
-    if line.len() == 0 { return 0; }
+    if line.is_empty() {
+        return 0;
+    }
 
-    let max = line [0..line.len()-1].chars().max().unwrap();
+    let max = line[0..line.len() - 1].chars().max().unwrap();
 
     let max_index = line.find(max).unwrap();
-    let next_max = line[(max_index+1)..].chars().max().unwrap();
-    
+    let next_max = line[(max_index + 1)..].chars().max().unwrap();
+
     //println!("Line: {}. Max: {} at index {}. Next Max: {}. Result: {}{}", line, max, max_index, next_max, max, next_max);
 
     10 * (max.to_digit(10).unwrap() as u64) + (next_max.to_digit(10).unwrap() as u64)
 }
 pub fn best_joltage_12(line: &str) -> u64 {
-    if line.len() == 0 { return 0; }
+    if line.is_empty() {
+        return 0;
+    }
 
     let mut max = Vec::new();
     let mut search_start = 0;
@@ -30,7 +34,9 @@ pub fn best_joltage_12(line: &str) -> u64 {
     for i in 0..12 {
         let search_legth = 12 - i;
         let search_end = line.len() - search_legth + 1;
-        if search_end <= search_start { break; }
+        if search_end <= search_start {
+            break;
+        }
 
         let segment = &line[search_start..search_end];
         let segment_max = segment.chars().max().unwrap();
@@ -38,7 +44,7 @@ pub fn best_joltage_12(line: &str) -> u64 {
 
         search_start += segment.find(segment_max).unwrap() + 1;
     }
-    
+
     let number: String = max.into_iter().collect();
     number.parse::<u64>().unwrap()
 }
@@ -49,7 +55,7 @@ pub fn part_two(input: &str) -> Option<u64> {
         .filter(|line| !line.is_empty())
         .map(best_joltage_12)
         .sum();
-        
+
     Some(result)
 }
 
@@ -57,7 +63,7 @@ pub fn part_two(input: &str) -> Option<u64> {
 mod tests {
     use super::*;
     #[test]
-    fn test_joltage_2(){
+    fn test_joltage_2() {
         assert_eq!(best_joltage_2("987654321111111"), 98);
         assert_eq!(best_joltage_2("811111111111119"), 89);
         assert_eq!(best_joltage_2("234234234234278"), 78);
@@ -65,7 +71,7 @@ mod tests {
     }
 
     #[test]
-    fn test_joltage_12(){
+    fn test_joltage_12() {
         assert_eq!(best_joltage_12("987654321111111"), 987654321111);
         assert_eq!(best_joltage_12("811111111111119"), 811111111119);
         assert_eq!(best_joltage_12("234234234234278"), 434234234278);

@@ -22,19 +22,17 @@ pub fn part_two(input: &str) -> Option<u64> {
     let mut stops = 0;
     let debug = false;
 
-    if debug{
+    if debug {
         println!("The dial starts by pointing at {}.", stop);
     }
 
     for item in &numbers {
-
         let rotation = *item;
         if rotation == 0 {
             continue;
         }
         let last = stop;
-        let zeros =
-        if rotation > 0 {
+        let zeros = if rotation > 0 {
             stop = (stop + rotation) % 100;
             (last + rotation) / 100
         } else {
@@ -45,11 +43,20 @@ pub fn part_two(input: &str) -> Option<u64> {
 
         stops += zeros as u64;
         if debug {
-            print!("{:0>4} The dial is rotated {} to point at {}", stops, rotation, stop);
+            print!(
+                "{:0>4} The dial is rotated {} to point at {}",
+                stops, rotation, stop
+            );
             if zeros == 1 {
-                print!(", ; during this rotation, it points at 0 {}", "once".white().bold());
+                print!(
+                    ", ; during this rotation, it points at 0 {}",
+                    "once".white().bold()
+                );
             } else if zeros > 1 {
-                print!("; during this rotation, it points at 0 {} time(s)", zeros.to_string().white().bold());
+                print!(
+                    "; during this rotation, it points at 0 {} time(s)",
+                    zeros.to_string().white().bold()
+                );
             }
 
             println!(".");
@@ -63,8 +70,8 @@ fn parse_rotation(input: &str) -> i32 {
 
     let i = line[1..].parse::<i32>();
 
-    match line.chars().nth(0).unwrap() {
-        'L' => -i.unwrap(), 
+    match line.chars().next().unwrap() {
+        'L' => -i.unwrap(),
         'R' => i.unwrap(),
         _ => panic!("Line must start with L or R: {}", line),
     }
