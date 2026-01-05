@@ -105,10 +105,6 @@ cargo clippy
 
 ## Optional template features
 
-### Enable code formatting / clippy checks in the CI
-
-Uncomment the respective sections in the `ci.yml` workflow.
-
 ### Use DHAT to profile heap allocations
 
 If you are not only interested in the runtime of your solution, but also its memory allocation profile, you can use the template's [DHAT](https://valgrind.org/docs/manual/dh-manual.html) integration to analyze it. In order to activate DHAT, call the `solve` command with the `--dhat` flag.
@@ -128,13 +124,6 @@ cargo solve 1 --dhat
 The command will output some basic stats to the command-line and generate a `dhat-heap.json` report in the repo root directory.
 
 You can pass the report a tool like [dh-view](https://nnethercote.github.io/dh_view/dh_view.html) to view a detailed breakdown of heap allocations.
-
-### Use VS Code to debug your code
-
-1.  Install [rust-analyzer](https://marketplace.visualstudio.com/items?itemName=rust-lang.rust-analyzer) and [CodeLLDB](https://marketplace.visualstudio.com/items?itemName=vadimcn.vscode-lldb).
-2.  Set breakpoints in your code. [^3]
-3.  Click _Debug_ next to the unit test or the _main_ function. [^4]
-4.  The debugger will halt your program at the specific line and allow you to inspect the local stack. [^5]
 
 ## Useful crates
 
